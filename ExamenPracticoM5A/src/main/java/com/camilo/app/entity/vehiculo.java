@@ -1,5 +1,6 @@
 package com.camilo.app.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -15,7 +16,7 @@ import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "vehiculo")
-public class vehiculo {
+public class vehiculo implements Serializable {
 
 	
 	private static final long serialVersionUID = -8743356424363980633L;

@@ -9,7 +9,6 @@ import com.camilo.app.repository.VehiculoRepository;
 
 
 @Service
-
 public class vehiculoserviciosimpl extends serviciosGenericosImpl<vehiculo, Long> implements vehiculosService  {
 
 	@Autowired
@@ -18,7 +17,7 @@ public class vehiculoserviciosimpl extends serviciosGenericosImpl<vehiculo, Long
 	@Override
 	public CrudRepository<vehiculo, Long> getDao() {
 		// TODO Auto-generated method stub
-		return null;
+		return vehiculoRepository;
 	}
 
 }
