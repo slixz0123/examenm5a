@@ -7,5 +7,6 @@ import com.camilo.app.entity.vehiculo;
 
 
 public interface VehiculoRepository  extends JpaRepository<vehiculo,Long> {
-
+ 
+	
 }
