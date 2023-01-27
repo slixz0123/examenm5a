@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,27 +16,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.camilo.app.entity.vehiculo;
+import com.camilo.app.service.vehiculosService;
 
-import com.camilo.app.service.vehiculoserviciosimpl;
 
 
 @RestController
 @RequestMapping("/api")
 public class vehiculoRestController {
 
-	
-	  
 	@Autowired   
-	private vehiculoserviciosimpl vehiculosService;
-	  
-	  
-	  // List all
-	
+	private vehiculosService vehicul ;
+
 	    @GetMapping("/vehiculo/list")
 	    public ResponseEntity<List<vehiculo>> obtenerLista() {
 	      
 	    	  try {
-	              return new ResponseEntity<>(vehiculosService.findByAll(), HttpStatus.OK);
+	              return new ResponseEntity<>(vehicul.findByAll(), HttpStatus.OK);
 	          } catch (Exception e) {
 	              return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	          }
@@ -48,14 +43,14 @@ public class vehiculoRestController {
 	    @PostMapping("/vehiculo/save")
 	    public ResponseEntity<?> createVehiculo( @RequestBody vehiculo vei) {
 	    
-	            return new ResponseEntity<>(vehiculosService.save(vei), HttpStatus.CREATED);
+	            return new ResponseEntity<>(vehicul.save(vei), HttpStatus.CREATED);
 
 	     
 	    }
 
 	    @GetMapping("/vehiculo/list/{id}")
 	    public ResponseEntity<?> vervehiculo(@PathVariable(value = "id") Long id) {
-	        Optional<vehiculo> valid = Optional.ofNullable(vehiculosService.findById(id));
+	        Optional<vehiculo> valid = Optional.ofNullable(vehicul.findById(id));
 	        if (!valid.isPresent()) {
 	            return ResponseEntity.notFound().build();
 	        }
@@ -64,7 +59,7 @@ public class vehiculoRestController {
 
 	    @PutMapping("/vehiculo/update/{id}")
 	    public ResponseEntity<?> updatevehiculo( @RequestBody vehiculo vei, @PathVariable(value = "id") Long id) {
-	        Optional<vehiculo> valid = Optional.ofNullable(vehiculosService.findById(id));
+	        Optional<vehiculo> valid = Optional.ofNullable(vehicul.findById(id));
 	        if (!valid.isPresent()) {
 	            return ResponseEntity.notFound().build();
 	        }
@@ -78,14 +73,14 @@ public class vehiculoRestController {
 
 	        
 	        
-	        return ResponseEntity.status(HttpStatus.CREATED).body(vehiculosService.save(valid.get()));
+	        return ResponseEntity.status(HttpStatus.CREATED).body(vehicul.save(valid.get()));
 
 	    }
 
 	    @DeleteMapping("/delete/vehiculo/{id}")
 	    public ResponseEntity<?> deletevehiculo(@PathVariable(value = "id") Long id) {
 	       
-	        	vehiculosService.delete(id);
+	    	vehicul.delete(id);
 	            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	       
 	    }

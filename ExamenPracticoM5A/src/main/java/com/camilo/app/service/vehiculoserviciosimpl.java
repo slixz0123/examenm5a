@@ -7,13 +7,16 @@ import org.springframework.stereotype.Service;
 import com.camilo.app.entity.vehiculo;
 import com.camilo.app.repository.VehiculoRepository;
 
+
 @Service
+
 public class vehiculoserviciosimpl extends serviciosGenericosImpl<vehiculo, Long> implements vehiculosService  {
 
 	@Autowired
 	VehiculoRepository vehiculoRepository ;
+
 	@Override
-	public CrudRepository<vehiculo, Long> getCrudRepository() {
+	public CrudRepository<vehiculo, Long> getDao() {
 		// TODO Auto-generated method stub
 		return null;
 	}

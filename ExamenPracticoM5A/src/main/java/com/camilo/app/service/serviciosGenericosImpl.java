@@ -13,18 +13,16 @@ import java.util.Optional;
 
 
 public abstract  class serviciosGenericosImpl <T, ID extends Serializable> implements  ServiciosGenrericos<T, ID>  {
+	 public abstract CrudRepository<T, ID> getDao();
 
-	   public abstract CrudRepository<T, ID> getCrudRepository();
-	   
-	   
-	   @Override
+	    @Override
 	    public T save(T Entity) {
-	        return getCrudRepository().save(Entity);
+	        return getDao().save(Entity);
 	    }
 
 	    @Override
 	    public T findById(ID id) {
-	        Optional<T> obj = getCrudRepository().findById(id);
+	        Optional<T> obj = getDao().findById(id);
 	        if (obj.isPresent()) {
 	            return obj.get();
 	        }
@@ -34,14 +32,13 @@ public abstract  class serviciosGenericosImpl <T, ID extends Serializable> imple
 	    @Override
 	    public List<T> findByAll() {
 	        List<T> list = new ArrayList<>();
-	        getCrudRepository().findAll().forEach(obj -> list.add(obj));
+	        getDao().findAll().forEach(obj -> list.add(obj));
 	        return list;
 	    }
 
 	    @Override
 	    public void delete(ID id) {
-	    	getCrudRepository().deleteById(id);
+	        getDao().deleteById(id);
 	    }
-	
 	
 }
