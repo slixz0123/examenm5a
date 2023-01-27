@@ -35,9 +35,11 @@ public class vehiculoRestController {
 	    @GetMapping("/vehiculo/list")
 	    public ResponseEntity<List<vehiculo>> obtenerLista() {
 	      
-	            return new ResponseEntity<>(vehiculosService.findByAll(), HttpStatus.OK);
-	       
-	      
+	    	  try {
+	              return new ResponseEntity<>(vehiculosService.findByAll(), HttpStatus.OK);
+	          } catch (Exception e) {
+	              return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	          }
 	        
 
 	    }
